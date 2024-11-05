@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Hur snabbt vår karaktär får röra sig
-    public float jumpForce = 5f; // Vilken force hopp knappen kan göra
+    public float jumpForce = 7f; // Vilken force hopp knappen kan göra
     public Transform groundCheck; // Kolla om spelaren har rört vid marken
     public float groundCheckRadius = 0.2f; // Inom vilken radie kan vi röra marken
     public LayerMask groundLayer; // Vilket lager har marken
@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        
+
+
+
     }
     private void Move(float direction)
     {

@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraMovement : MonoBehaviour
+{
+    float playerPos;
+    float AD;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        playerPos = GameObject.Find("Robin").transform.position.x; // tar robins x position
+        
+        transform.position = new Vector3(playerPos + AD , 0, -10);
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            AD -= 1f * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            AD += 1f * Time.deltaTime;
+        }
+        else
+        {   
+      
+            if (AD < 0)
+            {
+
+                AD += 1f * Time.deltaTime;
+
+            }
+            if (AD > 0)
+            {
+
+                AD -= 1f * Time.deltaTime;
+
+            }  
+           
+        }
+    }
+}
