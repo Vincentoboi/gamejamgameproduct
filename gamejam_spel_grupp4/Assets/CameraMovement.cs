@@ -19,28 +19,23 @@ public class CameraMovement : MonoBehaviour
         
         transform.position = new Vector3(playerPos + AD , 0, -10);
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D)&& AD > -4)
         {
-            AD -= 1f * Time.deltaTime;
+            AD += -2f * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && AD < 4)
         {
             AD += 1f * Time.deltaTime;
         }
         else
-        {   
-      
+        {        
             if (AD < 0)
             {
-
-                AD += 1f * Time.deltaTime;
-
+                AD += 1f * -AD * Time.deltaTime;
             }
             if (AD > 0)
             {
-
-                AD -= 1f * Time.deltaTime;
-
+                AD -= 1f * AD * Time.deltaTime;
             }  
            
         }
