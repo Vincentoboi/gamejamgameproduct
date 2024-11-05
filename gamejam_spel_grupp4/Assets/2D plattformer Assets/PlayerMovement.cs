@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Hur snabbt vår karaktär får röra sig
-    public float jumpForce = 5f; // Vilken force hopp knappen kan göra
+    public float jumpForce = 7f; // Vilken force hopp knappen kan göra
     public Transform groundCheck; // Kolla om spelaren har rört vid marken
     public float groundCheckRadius = 0.2f; // Inom vilken radie kan vi röra marken
     public LayerMask groundLayer; // Vilket lager har marken
@@ -35,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        
+
+
+
     }
     private void Move(float direction)
     {
@@ -50,5 +55,19 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;  // Flippa player spriten horisontellt
         transform.Rotate(0f, 180f, 0f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "NextLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (collision.tag == "PreviousLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+    }
+
+
 
 }
