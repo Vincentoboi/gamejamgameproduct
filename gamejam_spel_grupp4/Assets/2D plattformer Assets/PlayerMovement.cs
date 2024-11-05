@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-        
+            
 
 
 
@@ -54,5 +55,19 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;  // Flippa player spriten horisontellt
         transform.Rotate(0f, 180f, 0f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "NextLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (collision.tag == "PreviousLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+    }
+
+
 
 }
