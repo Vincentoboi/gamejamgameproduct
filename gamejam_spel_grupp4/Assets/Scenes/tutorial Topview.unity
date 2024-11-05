@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 275895610}
   m_Layer: 0
   m_Name: Square (9)
-  m_TagString: 'NextLevel '
+  m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

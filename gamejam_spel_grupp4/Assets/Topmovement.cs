@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Topmovement : MonoBehaviour
 {
-    float moveSpeed = 5;
+    float moveSpeed = 7;
 
 
     // Start is called before the first frame update
@@ -40,4 +41,19 @@ public class Topmovement : MonoBehaviour
 
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Box touched");
+        if (collision.tag == "NextLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (collision.tag == "PreviousLevel")
+	{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+    }
+
 }
+
