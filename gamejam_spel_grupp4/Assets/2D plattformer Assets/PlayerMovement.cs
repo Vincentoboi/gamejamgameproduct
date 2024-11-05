@@ -54,4 +54,5 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;  // Flippa player spriten horisontellt
         transform.Rotate(0f, 180f, 0f);
     }
+
 }
