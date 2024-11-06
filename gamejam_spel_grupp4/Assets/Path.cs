@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Path : MonoBehaviour
@@ -45,6 +46,10 @@ public class Path : MonoBehaviour
           
         }
 
+        Vector3 look = transform.InverseTransformPoint(Points[pointsIndex].transform.position);
+        float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
+
+        transform.Rotate(0, 0, angle);
     }
     void timerEnded()
     {
