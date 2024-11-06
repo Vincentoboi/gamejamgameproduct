@@ -60,8 +60,6 @@ public class Topmovement : MonoBehaviour
         }
         if (collision.tag == "NPC" && caught == false)
         {
-            
-
 
             caught = true;
             Debug.Log("Caught");
@@ -70,7 +68,14 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
+        if (collision.tag == "Loot") ;
+        {
+           
+            transform.GetChild(1).gameObject.SetActive(true);
 
+
+
+        }
 
 
 
