@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class Topmovement : MonoBehaviour
 {
     float moveSpeed = 7;
     bool caught = false;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -23,19 +25,43 @@ public class Topmovement : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                anim.Play("PLayerTop_idle");
+                Debug.Log("DU SLutade gå uppåt");
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.position -= new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                anim.Play("PLayerTop_idle");
             }
             if (Input.GetKey(KeyCode.D))
             {
                 transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                anim.Play("PLayerTop_idle");
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                 anim.Play("Playertop_walk");
             }
+            else if (Input.GetKeyUp(KeyCode.A))
+            {
+                anim.Play("PLayerTop_idle");
+            }
+
+
+
         }
         if (caught == false) 
         {
@@ -60,8 +86,6 @@ public class Topmovement : MonoBehaviour
         }
         if (collision.tag == "NPC" && caught == false)
         {
-            
-
 
             caught = true;
             Debug.Log("Caught");
@@ -70,11 +94,23 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
+        if (collision.tag == "Loot") ;
+        {
+           
+            transform.GetChild(1).gameObject.SetActive(true);
 
 
+
+        }
+
+        
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        transform.GetChild(1).gameObject.SetActive(false);
 
 
     }
-
 }
 
