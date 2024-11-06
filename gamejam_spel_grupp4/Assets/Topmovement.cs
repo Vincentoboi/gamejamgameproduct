@@ -29,19 +29,38 @@ public class Topmovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.W))
             {
                 anim.Play("PLayerTop_idle");
+                Debug.Log("DU SLutade gå uppåt");
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.position -= new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                anim.Play("PLayerTop_idle");
             }
             if (Input.GetKey(KeyCode.D))
             {
                 transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                anim.Play("PLayerTop_idle");
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                 anim.Play("Playertop_walk");
             }
+            else if (Input.GetKeyUp(KeyCode.A))
+            {
+                anim.Play("PLayerTop_idle");
+            }
+
+
+
         }
         if (caught == false) 
         {
