@@ -57,7 +57,7 @@ public class Path : MonoBehaviour
         targetTime += 3f;
         Debug.Log("TIMER ENDED");
     }
-    
+ 
 
 
 
