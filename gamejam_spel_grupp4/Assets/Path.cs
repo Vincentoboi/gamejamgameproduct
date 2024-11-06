@@ -10,12 +10,14 @@ public class Path : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
 
+    [SerializeField] private float moveTimer;
+
     private int pointsIndex;
-    float targetTime = 3;
+    float targetTime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        targetTime += moveTimer;
         transform.position = Points[pointsIndex].transform.position; 
     }
 
@@ -51,7 +53,7 @@ public class Path : MonoBehaviour
     void timerEnded()
     {
         pointsIndex += 1; // byter vilken waypoint man ska gå till
-        targetTime += 3f; // resetar timer byt om du ska ändra tid
+        targetTime += moveTimer; // resetar timer byt om du ska ändra tid
         Debug.Log("TIMER ENDED");
     }
  
