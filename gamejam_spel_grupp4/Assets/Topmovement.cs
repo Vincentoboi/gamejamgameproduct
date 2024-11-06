@@ -58,7 +58,7 @@ public class Topmovement : MonoBehaviour
             Debug.Log("Box touched");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
-        if (collision.tag == "NPC" && caught == false) ;
+        if (collision.tag == "NPC" && caught == false)
         {
             caught = true;
             Debug.Log("Caught");
