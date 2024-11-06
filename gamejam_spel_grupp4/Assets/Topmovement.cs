@@ -11,12 +11,14 @@ public class Topmovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        caught = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(caught == false)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -35,28 +37,37 @@ public class Topmovement : MonoBehaviour
                 transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
             }
         }
+        if (caught == false) 
+        {
+            transform.GetChild(1).gameObject.SetActive(false); // ser till att fucking icon inte alltid existerar
 
 
-
-
-
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Box touched");
+        
         if (collision.tag == "NextLevel")
-	{
+	    {
+            Debug.Log("Box touched");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         if (collision.tag == "PreviousLevel")
-	{
+	    {
+            Debug.Log("Box touched");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         if (collision.tag == "NPC" && caught == false)
         {
+            
+
+
             caught = true;
             Debug.Log("Caught");
+
+            transform.GetChild(1).gameObject.SetActive(true); //spawnar Caught iconen
+            Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
 
