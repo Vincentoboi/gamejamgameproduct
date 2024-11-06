@@ -7,6 +7,7 @@ public class Topmovement : MonoBehaviour
 {
     float moveSpeed = 7;
     bool caught = false;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,11 @@ public class Topmovement : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
+                anim.Play("Playertop_walk");
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                anim.Play("PLayerTop_idle");
             }
             if (Input.GetKey(KeyCode.S))
             {
