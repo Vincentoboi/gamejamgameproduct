@@ -53,7 +53,7 @@ public class Topmovement : MonoBehaviour
 	{
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
-        if (collision.tag == "NPC" && caught == false) ;
+        if (collision.tag == "NPC" && caught == false)
         {
             caught = true;
             Debug.Log("Caught");
