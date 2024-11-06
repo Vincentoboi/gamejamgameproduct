@@ -38,14 +38,11 @@ public class Path : MonoBehaviour
 
         if (pointsIndex <= Points.Length - 1)
         {
-
-
-
+            //denhär skiten får npc att få till waypoint(ingen aning hur den funkar)
             transform.position = Vector2.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
-
-          
         }
 
+        // så man kan kolla på waypoint framför en (ingen aning hur det funkar)
         Vector3 look = transform.InverseTransformPoint(Points[pointsIndex].transform.position);
         float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
 
@@ -53,8 +50,8 @@ public class Path : MonoBehaviour
     }
     void timerEnded()
     {
-        pointsIndex += 1;
-        targetTime += 3f;
+        pointsIndex += 1; // byter vilken waypoint man ska gå till
+        targetTime += 3f; // resetar timer byt om du ska ändra tid
         Debug.Log("TIMER ENDED");
     }
  

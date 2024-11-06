@@ -39,7 +39,7 @@ public class Topmovement : MonoBehaviour
         }
         if (caught == false) 
         {
-            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false); // ser till att fucking icon inte alltid existerar
 
 
         }
@@ -60,16 +60,14 @@ public class Topmovement : MonoBehaviour
         }
         if (collision.tag == "NPC" && caught == false)
         {
+            
+
+
             caught = true;
             Debug.Log("Caught");
 
-            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true); //spawnar Caught iconen
             Debug.Log("YOu got Caught, Making Shit Happen");
-
-
-
-
-
 
         }
 
