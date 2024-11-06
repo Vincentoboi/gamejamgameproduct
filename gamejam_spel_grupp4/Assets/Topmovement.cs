@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -102,9 +103,14 @@ public class Topmovement : MonoBehaviour
 
         }
 
+        
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        transform.GetChild(1).gameObject.SetActive(false);
 
 
     }
-
 }
 
