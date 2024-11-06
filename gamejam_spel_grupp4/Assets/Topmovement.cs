@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Topmovement : MonoBehaviour
 {
     float moveSpeed = 7;
-
+    bool caught = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +53,16 @@ public class Topmovement : MonoBehaviour
 	{
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
+        if (collision.tag == "NPC" && caught == false) ;
+        {
+            caught = true;
+            Debug.Log("Caught");
+
+        }
+
+
+
+
     }
 
 }

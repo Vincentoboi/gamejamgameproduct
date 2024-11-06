@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PreviousLevel
   - NextLevel
+  - 'NextLevel '
+  - NPC
   layers:
   - Default
   - TransparentFX
