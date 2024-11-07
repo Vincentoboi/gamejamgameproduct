@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Topmovement : MonoBehaviour
 {
@@ -12,12 +14,14 @@ public class Topmovement : MonoBehaviour
     public Animator anim;
     private float diagonalWalk;
     float sceneResetTimer = 3;
+    [SerializeField] private Text cashAmountText;
+    [SerializeField] private TextMeshProUGUI caughtText;
 
     // Start is called before the first frame update
     void Start()
     {
         caught = false;
-        transform.GetChild(2).gameObject.SetActive(false);
+        //transform.GetChild(2).gameObject.SetActive(false);
         
         
     }
@@ -100,12 +104,15 @@ public class Topmovement : MonoBehaviour
         if (caught == false)
         {
             transform.GetChild(1).gameObject.SetActive(false); // ser till att fucking icon inte alltid existerar
-
+            caughtText.text = " ";
         }
         if (caught == true)
-        {  
-            sceneResetTimer -= Time.deltaTime;
-            if (sceneResetTimer <= 0)
+        {
+
+            caughtText.text = "YOU GOT CAUGHT";
+
+            sceneResetTimer -= Time.deltaTime; 
+            if (sceneResetTimer <= 0) // reseta level
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Debug.Log("RESETING LEVEL");
