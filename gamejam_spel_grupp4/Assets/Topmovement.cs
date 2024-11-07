@@ -34,7 +34,7 @@ public class Topmovement : MonoBehaviour
     void Update()
     {
 
-        cashAmountText.text = "Total Robbed Value: ";//+ cashStolen;
+        cashAmountText.text = "Total Robbed Value: " + cashStolen;
 
         if(Input.GetButtonDown("E"))
         {
@@ -171,12 +171,17 @@ public class Topmovement : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Loot" && Input.GetButtonDown("E"))
+        
+        //för någon dum anledning börjar denhär koden fungera några sekunder efter man har startat scenen????
+
+        //gör så att du får pängar av att plocka upp items
+        if (collision.tag == "Loot" && Input.GetKeyDown(KeyCode.E)) 
         {
             Debug.Log("du plocka upp skit");
             itemValue = collision.gameObject.GetComponent<Loot>().value;
             cashStolen += itemValue;
             Debug.Log(cashStolen);
+            Destroy(collision.gameObject);
         }
     }
 }
