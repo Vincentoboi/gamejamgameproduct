@@ -16,6 +16,15 @@ public class Loot : MonoBehaviour
         if (InRange && Input.GetKeyDown(KeyCode.E))
         {
             gameObject.SetActive(false);
+          
+        }
+        if(InRange)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

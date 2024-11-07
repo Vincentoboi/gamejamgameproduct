@@ -8,15 +8,18 @@ using UnityEngine.SceneManagement;
 public class Topmovement : MonoBehaviour
 {
     float moveSpeed = 7;
-    bool caught = false;
+    public bool caught = false;
     public Animator anim;
     private float diagonalWalk;
+    float sceneResetTimer = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         caught = false;
         transform.GetChild(2).gameObject.SetActive(false);
+        
+        
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class Topmovement : MonoBehaviour
 
         if(caught == false)
         {
+
             if (Input.GetKey(KeyCode.W))
             {
                 transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
@@ -72,7 +76,9 @@ public class Topmovement : MonoBehaviour
             {
                 anim.Play("PLayerTop_idle");
             }
-            // DETHÄR ÄR MEGA SCUFFED FÖRLÅT TOBIAS
+            // DETHÄR ÄR SCUFFED FÖRLÅT TOBIAS
+            
+            // Gör så han kollar diagonal när han går diagonalt
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
             {
                 diagonalWalk = -45;
@@ -91,24 +97,36 @@ public class Topmovement : MonoBehaviour
 
 
         }
-        if (caught == false) 
+        if (caught == false)
         {
             transform.GetChild(1).gameObject.SetActive(false); // ser till att fucking icon inte alltid existerar
 
-
         }
+        if (caught == true)
+        {  
+            sceneResetTimer -= Time.deltaTime;
+            if (sceneResetTimer <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Debug.Log("RESETING LEVEL");
+
+            }
+        }
+
+        //Debug.Log(sceneResetTimer); 
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.tag == "NextLevel")
-	    {
+        {
             Debug.Log("Box touched");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         if (collision.tag == "PreviousLevel")
-	    {
+        {
             Debug.Log("Box touched");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
@@ -122,25 +140,7 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
-        if (collision.tag == "Loot") ;
-        {
-           
-            transform.GetChild(2).gameObject.SetActive(true);
-            // visa Controls
-
-
-        }
-
-        
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-
-        Debug.Log("gömmer controls");
-        transform.GetChild(2).gameObject.SetActive(false);
-        //göm controls
-
+       
     }
 }
 
