@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Path : MonoBehaviour
 {
+    [SerializeField] private float pointAmount;
 
     [SerializeField] Transform[] Points;
 
@@ -30,8 +31,8 @@ public class Path : MonoBehaviour
         {
             timerEnded();
         }
-        Debug.Log(pointsIndex);
-        if (pointsIndex == 6)
+        //Debug.Log(pointsIndex);
+        if (pointsIndex == pointAmount) // reset poojtn
         {
             pointsIndex = 0;
 
@@ -40,11 +41,11 @@ public class Path : MonoBehaviour
 
         if (pointsIndex <= Points.Length - 1)
         {
-            //denhär skiten får npc att få till waypoint(ingen aning hur den funkar)
+            //denhär skiten får npc att få till waypoint
             transform.position = Vector2.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
         }
 
-        // så man kan kolla på waypoint framför en (ingen aning hur det funkar)
+        // så man kan kolla på waypoint framför en (ingen vad InvereseTransformPoint är för nåt helt ärlgit sorry tobias)
         Vector3 look = transform.InverseTransformPoint(Points[pointsIndex].transform.position);
         float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
 
@@ -53,7 +54,7 @@ public class Path : MonoBehaviour
     void timerEnded()
     {
         pointsIndex += 1; // byter vilken waypoint man ska gå till
-        targetTime += moveTimer; // resetar timer byt om du ska ändra tid
+        targetTime += moveTimer; // resetar timer 
         Debug.Log("TIMER ENDED");
     }
  
