@@ -9,6 +9,8 @@ TagManager:
   - 'NextLevel '
   - NPC
   - Loot
+  - Teleporter
+  - TeleporterBack
   layers:
   - Default
   - TransparentFX

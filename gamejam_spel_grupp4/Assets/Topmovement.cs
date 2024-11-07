@@ -16,6 +16,8 @@ public class Topmovement : MonoBehaviour
     float sceneResetTimer = 3;
     [SerializeField] private Text cashAmountText;
     [SerializeField] private TextMeshProUGUI caughtText;
+    [SerializeField] private Transform nextTeleportTarget;
+    [SerializeField] private Transform previousTeleportTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -147,7 +149,15 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
-       
+        if (collision.tag == "Teleporter") 
+        {
+            gameObject.transform.position = nextTeleportTarget.transform.position;
+        }
+        if (collision.tag == "TeleporterBack")
+        {
+            gameObject.transform.position = previousTeleportTarget.transform.position;
+        }
+
     }
 }
 
