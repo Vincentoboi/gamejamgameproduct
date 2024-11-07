@@ -12,15 +12,14 @@ public class UI : MonoBehaviour
     }
     
     void Update()
-    {
-        
+    {      
         if (playerScript.caught == true)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(false);
         }
 
     }
