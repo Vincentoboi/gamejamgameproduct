@@ -9,11 +9,11 @@ public class Loot : MonoBehaviour
 {
 
     bool InRange = false;
-    [SerializeField] float value;
+    [SerializeField]public float value;
 
     private void Update()
     {
-        if (InRange && Input.GetKeyDown(KeyCode.E))
+        if (InRange && Input.GetKeyUp(KeyCode.E))
         {
             gameObject.SetActive(false);
           

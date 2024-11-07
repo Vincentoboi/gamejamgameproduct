@@ -14,7 +14,9 @@ public class Topmovement : MonoBehaviour
     public Animator anim;
     private float diagonalWalk;
     float sceneResetTimer = 3;
-    [SerializeField] private Text cashAmountText;
+    private float cashStolen = 0;
+    public float itemValue;
+    [SerializeField] private TextMeshProUGUI cashAmountText;
     [SerializeField] private TextMeshProUGUI caughtText;
     [SerializeField] private Transform nextTeleportTarget;
     [SerializeField] private Transform previousTeleportTarget;
@@ -31,6 +33,14 @@ public class Topmovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        cashAmountText.text = "Total Robbed Value: ";//+ cashStolen;
+
+        if(Input.GetButtonDown("E"))
+        {
+            Debug.Log("DU TRYCKTE PÅ E");
+
+        }
 
         if(caught == false)
         {
@@ -149,7 +159,7 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
-        if (collision.tag == "Teleporter") 
+        if (collision.tag == "Teleporter") //teleporta fra o tillbacka
         {
             gameObject.transform.position = nextTeleportTarget.transform.position;
         }
@@ -157,7 +167,17 @@ public class Topmovement : MonoBehaviour
         {
             gameObject.transform.position = previousTeleportTarget.transform.position;
         }
-
+    
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Loot" && Input.GetButtonDown("E"))
+        {
+            Debug.Log("du plocka upp skit");
+            itemValue = collision.gameObject.GetComponent<Loot>().value;
+            cashStolen += itemValue;
+            Debug.Log(cashStolen);
+        }
     }
 }
 
