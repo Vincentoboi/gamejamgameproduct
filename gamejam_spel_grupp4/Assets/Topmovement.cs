@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +10,13 @@ public class Topmovement : MonoBehaviour
     float moveSpeed = 7;
     bool caught = false;
     public Animator anim;
+    private float diagonalWalk;
 
     // Start is called before the first frame update
     void Start()
     {
         caught = false;
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,16 +29,20 @@ public class Topmovement : MonoBehaviour
             {
                 transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
                 anim.Play("Playertop_walk");
+                transform.eulerAngles = new Vector3(0, 0, 0 + diagonalWalk);
+
             }
             else if (Input.GetKeyUp(KeyCode.W))
             {
                 anim.Play("PLayerTop_idle");
                 Debug.Log("DU SLutade gå uppåt");
+                
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.position -= new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
                 anim.Play("Playertop_walk");
+                transform.eulerAngles = new Vector3(0, 0, 180 + diagonalWalk);
             }
             else if (Input.GetKeyUp(KeyCode.S))
             {
@@ -45,6 +52,11 @@ public class Topmovement : MonoBehaviour
             {
                 transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
                 anim.Play("Playertop_walk");
+                //gameObject.transform.localRotation = quaternion.Euler(0,0, -90); <-- BLIR PÅ NPGOT SETT FUCKING -116.838 VEM FAN GJORDE ROTATION I UNITY
+                transform.eulerAngles = new Vector3(0, 0, -90 + diagonalWalk);
+
+
+
             }
             else if (Input.GetKeyUp(KeyCode.D))
             {
@@ -54,12 +66,28 @@ public class Topmovement : MonoBehaviour
             {
                 transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
                  anim.Play("Playertop_walk");
+                transform.eulerAngles = new Vector3(0, 0, 90 + diagonalWalk);
             }
             else if (Input.GetKeyUp(KeyCode.A))
             {
                 anim.Play("PLayerTop_idle");
             }
+            // DETHÄR ÄR MEGA SCUFFED FÖRLÅT TOBIAS
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
+            {
+                diagonalWalk = -45;
+                Debug.Log("Går diagolant");
+            }
+            else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+            {
+                diagonalWalk = 45;
 
+            }
+            else 
+            {
+                diagonalWalk = 0;
+
+            }
 
 
         }
@@ -97,8 +125,8 @@ public class Topmovement : MonoBehaviour
         if (collision.tag == "Loot") ;
         {
            
-            transform.GetChild(1).gameObject.SetActive(true);
-
+            transform.GetChild(2).gameObject.SetActive(true);
+            // visa Controls
 
 
         }
@@ -108,8 +136,10 @@ public class Topmovement : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        transform.GetChild(1).gameObject.SetActive(false);
 
+        Debug.Log("gömmer controls");
+        transform.GetChild(2).gameObject.SetActive(false);
+        //göm controls
 
     }
 }
