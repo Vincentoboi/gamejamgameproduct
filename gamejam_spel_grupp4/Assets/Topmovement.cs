@@ -33,8 +33,8 @@ public class Topmovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        cashAmountText.text = "Total Robbed Value: " + cashStolen;
+          
+        cashAmountText.text = "Total Robbed Value: " + cashStolen + "$";
 
         if(Input.GetButtonDown("E"))
         {
