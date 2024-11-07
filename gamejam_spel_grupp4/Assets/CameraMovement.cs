@@ -15,6 +15,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //ganska scuffed men fungerade kod som gör cameran i 2D sidescroller delen lite smooth och spicy
+
         playerPos = GameObject.Find("Robin").transform.position.x; // tar robins x position
         
         transform.position = new Vector3(playerPos + AD , 0, -10);

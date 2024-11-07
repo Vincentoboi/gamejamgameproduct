@@ -33,10 +33,10 @@ public class Topmovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          
-        cashAmountText.text = "Total Robbed Value: " + cashStolen + "$";
+        //ändrar ui $ amount  
+        cashAmountText.text = "Total Robbed Value: " + cashStolen + "$"; 
 
-        if(Input.GetButtonDown("E"))
+        if(Input.GetButtonDown("E")) // dethär är värdelöst men gulligt så vi har kvar det
         {
             Debug.Log("DU TRYCKTE PÅ E");
 
@@ -44,7 +44,7 @@ public class Topmovement : MonoBehaviour
 
         if(caught == false)
         {
-
+            //scuffed movement och animation och rotation.... hela spelet är scuffed nu när jag tänker på det
             if (Input.GetKey(KeyCode.W))
             {
                 transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
@@ -138,7 +138,7 @@ public class Topmovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        //byta scen koden
         if (collision.tag == "NextLevel")
         {
             Debug.Log("Box touched");
@@ -159,7 +159,7 @@ public class Topmovement : MonoBehaviour
             Debug.Log("YOu got Caught, Making Shit Happen");
 
         }
-        if (collision.tag == "Teleporter") //teleporta fra o tillbacka
+        if (collision.tag == "Teleporter") //teleporta fram o tillbacka
         {
             gameObject.transform.position = nextTeleportTarget.transform.position;
         }
@@ -172,7 +172,7 @@ public class Topmovement : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         
-        //för någon dum anledning börjar denhär koden fungera några sekunder efter man har startat scenen????
+        //för någon dum anledning vill denhär fucking koden fungera några sekunder efter man har startat scenen????
 
         //gör så att du får pängar av att plocka upp items
         if (collision.tag == "Loot" && Input.GetKeyDown(KeyCode.E)) 

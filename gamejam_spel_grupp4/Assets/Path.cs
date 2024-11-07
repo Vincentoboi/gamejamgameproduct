@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -41,19 +41,20 @@ public class Path : MonoBehaviour
 
         if (pointsIndex <= Points.Length - 1)
         {
-            //denhär skiten får npc att få till waypoint
+            //denhÃ¤r skiten fÃ¥r npc att fÃ¥ till waypoint
             transform.position = Vector2.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
         }
 
-        // så man kan kolla på waypoint framför en (ingen vad InvereseTransformPoint är för nåt helt ärlgit sorry tobias)
+        // gÃ¶r sÃ¥ npc kollar pÃ¥ nÃ¤sta waypoint (fattar nÃ¤stan hur den funkar) Â¯\_(ãƒ„)_/Â¯
         Vector3 look = transform.InverseTransformPoint(Points[pointsIndex].transform.position);
         float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
 
         transform.Rotate(0, 0, angle);
     }
+    // dethÃ¤r Ã¤r lite scuffed honestly  \/
     void timerEnded()
     {
-        pointsIndex += 1; // byter vilken waypoint man ska gå till
+        pointsIndex += 1; // byter vilken waypoint man ska gÃ¥ till
         targetTime += moveTimer; // resetar timer 
         Debug.Log("TIMER ENDED");
     }
