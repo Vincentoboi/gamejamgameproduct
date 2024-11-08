@@ -172,7 +172,7 @@ public class Topmovement : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         
-        //för någon dum anledning vill denhär fucking koden fungera några sekunder efter man har startat scenen????
+        //för någon dum anledning vill denhär fucking koden bara fungera ibland????
 
         //gör så att du får pängar av att plocka upp items
         if (collision.tag == "Loot" && Input.GetKeyDown(KeyCode.E)) 
