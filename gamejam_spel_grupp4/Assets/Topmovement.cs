@@ -123,28 +123,17 @@ public class Topmovement : MonoBehaviour
                 Debug.Log(cashStolen);
                 Destroy(currentLoot);
             }
-            
-            if (wifiIsHere)
-            {
-                transform.GetChild(2).gameObject.SetActive(true);
-
-            }
-            else
-            {
-                transform.GetChild(2).gameObject.SetActive(false);
-            }
-
-
-
-
+          
         }
         if (caught == false)
         {
-            transform.GetChild(1).gameObject.SetActive(false); // ser till att  caught icon inte alltid existerar
+            this.transform.GetChild(1).gameObject.SetActive(false); // ser till att  caught icon inte alltid existerar
             caughtText.text = " ";
         }
         if (caught == true)
         {
+
+            this.transform.GetChild(1).gameObject.SetActive(true);
 
             caughtText.text = "YOU GOT CAUGHT";
 
