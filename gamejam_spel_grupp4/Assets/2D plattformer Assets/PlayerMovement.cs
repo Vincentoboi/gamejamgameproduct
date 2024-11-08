@@ -58,27 +58,16 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "NextLevel" && Input.GetKeyDown(KeyCode.E))
+        if (collision.tag == "NextLevel")
         {
 
-            transform.GetChild(1).gameObject.SetActive(true);
+           
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        if (collision.tag == "PreviousLevel" && Input.GetKeyDown(KeyCode.E))
+        if (collision.tag == "PreviousLevel")
         {
-            transform.GetChild(1).gameObject.SetActive(true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "NextLevel" || collision.tag == "PreviousLevel")
-        {
-            transform.GetChild(1).gameObject.SetActive(false);
 
-
-        }
-
-
-    }
 }
