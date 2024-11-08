@@ -1225,8 +1225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caught: 0
   anim: {fileID: 0}
+  itemValue: 0
   cashAmountText: {fileID: 0}
   caughtText: {fileID: 0}
+  nextTeleportTarget: {fileID: 0}
+  previousTeleportTarget: {fileID: 0}
 --- !u!58 &1123722751
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2027,8 +2030,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caught: 0
   anim: {fileID: 1586598352}
+  itemValue: 0
   cashAmountText: {fileID: 0}
   caughtText: {fileID: 0}
+  nextTeleportTarget: {fileID: 0}
+  previousTeleportTarget: {fileID: 0}
 --- !u!58 &1586598356
 CircleCollider2D:
   m_ObjectHideFlags: 0
