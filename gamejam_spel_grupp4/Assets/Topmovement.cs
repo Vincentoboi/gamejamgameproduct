@@ -20,29 +20,32 @@ public class Topmovement : MonoBehaviour
     [SerializeField] private TextMeshProUGUI caughtText;
     [SerializeField] private Transform nextTeleportTarget;
     [SerializeField] private Transform previousTeleportTarget;
+    private GameObject currentLoot;
+    private bool lootIsHere;
+    private bool wifiIsHere;
 
     // Start is called before the first frame update
     void Start()
     {
         caught = false;
         //transform.GetChild(2).gameObject.SetActive(false);
-        
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //ändrar ui $ amount  
-        cashAmountText.text = "Total Robbed Value: " + cashStolen + "$"; 
+        cashAmountText.text = "Total Robbed Value: " + cashStolen + "$";
 
-        if(Input.GetButtonDown("E")) // dethär är värdelöst men gulligt så vi har kvar det
+        if (Input.GetButtonDown("E")) // dethär är värdelöst men gulligt så vi har kvar det
         {
             Debug.Log("DU TRYCKTE PÅ E");
 
         }
 
-        if(caught == false)
+        if (caught == false)
         {
             //scuffed movement och animation och rotation.... hela spelet är scuffed nu när jag tänker på det
             if (Input.GetKey(KeyCode.W))
@@ -56,7 +59,7 @@ public class Topmovement : MonoBehaviour
             {
                 anim.Play("PLayerTop_idle");
                 Debug.Log("DU SLutade gå uppåt");
-                
+
             }
             if (Input.GetKey(KeyCode.S))
             {
@@ -85,7 +88,7 @@ public class Topmovement : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
-                 anim.Play("Playertop_walk");
+                anim.Play("Playertop_walk");
                 transform.eulerAngles = new Vector3(0, 0, 90 + diagonalWalk);
             }
             else if (Input.GetKeyUp(KeyCode.A))
@@ -93,7 +96,7 @@ public class Topmovement : MonoBehaviour
                 anim.Play("PLayerTop_idle");
             }
             // DETHÄR ÄR SCUFFED FÖRLÅT TOBIAS
-            
+
             // Gör så han kollar diagonal när han går diagonalt
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
             {
@@ -105,17 +108,39 @@ public class Topmovement : MonoBehaviour
                 diagonalWalk = 45;
 
             }
-            else 
+            else
             {
                 diagonalWalk = 0;
 
             }
 
+            //gör så man plockar upp items
+            if (lootIsHere && Input.GetKeyDown(KeyCode.E) && currentLoot != null)
+            {
+                Debug.Log("du plocka upp skit");
+                itemValue = currentLoot.gameObject.GetComponent<Loot>().value;
+                cashStolen += itemValue;
+                Debug.Log(cashStolen);
+                Destroy(currentLoot);
+            }
+            
+            if (wifiIsHere)
+            {
+                transform.GetChild(2).gameObject.SetActive(true);
+
+            }
+            else
+            {
+                transform.GetChild(2).gameObject.SetActive(false);
+            }
+
+
+
 
         }
         if (caught == false)
         {
-            transform.GetChild(1).gameObject.SetActive(false); // ser till att fucking icon inte alltid existerar
+            transform.GetChild(1).gameObject.SetActive(false); // ser till att  caught icon inte alltid existerar
             caughtText.text = " ";
         }
         if (caught == true)
@@ -123,7 +148,7 @@ public class Topmovement : MonoBehaviour
 
             caughtText.text = "YOU GOT CAUGHT";
 
-            sceneResetTimer -= Time.deltaTime; 
+            sceneResetTimer -= Time.deltaTime;
             if (sceneResetTimer <= 0) // reseta level
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -156,7 +181,7 @@ public class Topmovement : MonoBehaviour
             Debug.Log("Caught");
 
             transform.GetChild(1).gameObject.SetActive(true); //spawnar Caught iconen
-            Debug.Log("YOu got Caught, Making Shit Happen");
+            Debug.Log("You got Caught, Making Shit Happen");
 
         }
         if (collision.tag == "Teleporter") //teleporta fram o tillbacka
@@ -167,22 +192,37 @@ public class Topmovement : MonoBehaviour
         {
             gameObject.transform.position = previousTeleportTarget.transform.position;
         }
-    
+
+
     }
     private void OnTriggerStay2D(Collider2D collision)
-    {
-        
-        //för någon dum anledning vill denhär fucking koden bara fungera ibland????
-
-        //gör så att du får pängar av att plocka upp items
-        if (collision.tag == "Loot" && Input.GetKeyDown(KeyCode.E)) 
+    {     //kollar om man står vid loot
+        if (collision.tag == "Loot")
         {
-            Debug.Log("du plocka upp skit");
-            itemValue = collision.gameObject.GetComponent<Loot>().value;
-            cashStolen += itemValue;
-            Debug.Log(cashStolen);
-            Destroy(collision.gameObject);
+            currentLoot = collision.gameObject;
+            lootIsHere = true;
         }
+        if (collision.tag == "WifiRouter")
+        {
+            wifiIsHere = true;
+
+        }
+
     }
-}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Loot")
+        {
+            currentLoot = null;
+            lootIsHere = false;
+        }
+        if (collision.tag == "WifiRouter")
+        {
+            wifiIsHere = false;
+
+        }
+
+
+    }
+}   
 

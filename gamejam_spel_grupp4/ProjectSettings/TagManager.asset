@@ -11,6 +11,7 @@ TagManager:
   - Loot
   - Teleporter
   - TeleporterBack
+  - WifiRouter
   layers:
   - Default
   - TransparentFX
