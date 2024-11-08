@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    float playerPos;
+    [SerializeField] Transform  playerPos;
     float AD;
     // Start is called before the first frame update
     void Start()
@@ -18,9 +18,8 @@ public class CameraMovement : MonoBehaviour
 
         //ganska scuffed men fungerade kod som gör cameran i 2D sidescroller delen lite smooth och spicy
 
-        playerPos = GameObject.Find("Robin").transform.position.x; // tar robins x position
         
-        transform.position = new Vector3(playerPos + AD , 0, -10);
+        transform.position = new Vector3(playerPos.transform.position.x + AD , 0, -10);
 
         if (Input.GetKey(KeyCode.D)&& AD > -4)
         {
